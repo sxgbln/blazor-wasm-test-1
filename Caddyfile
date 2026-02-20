@@ -7,9 +7,9 @@
     @wasm path /_framework/*.wasm
     header @wasm Content-Type application/wasm
 
-    # CSP that Blazor WebAssembly actually needs (Microsoft's recommendation)
+    # Updated CSP for Blazor WebAssembly
     header {
-        Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self';"
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self';"
         X-Content-Type-Options "nosniff"
         Referrer-Policy "strict-origin-when-cross-origin"
     }
