@@ -1,0 +1,16 @@
+:80 {
+    root * .
+    file_server
+    try_files {path} /index.html   # This makes all routes (like /counter) work
+
+    # Force correct MIME type for .wasm files (just in case)
+    @wasm path /_framework/*.wasm
+    header @wasm Content-Type application/wasm
+
+    # CSP that Blazor WebAssembly actually needs (Microsoft's recommendation)
+    header {
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https:; object-src 'none'; base-uri 'self';"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+}
